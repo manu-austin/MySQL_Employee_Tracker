@@ -14,9 +14,9 @@ VALUES ('Production Associate', 60000, 1),
 ('Sales Manager', 150000, 2), 
 ('Research Associate', 90000, 3), 
 ('Head of Research', 130000, 3), 
-('Accountant', 35000, 4);
-('Head of Accounting', 110000, 4);
-('Head of HR', 130000, 5);
+('Accountant', 35000, 4),
+('Head of Accounting', 110000, 4),
+('Head of HR', 130000, 5),
 ('Talent Acquisition Associate', 30000, 5);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id) 
