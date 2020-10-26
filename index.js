@@ -8,7 +8,7 @@ const connection = require("./config/connection");
 
 
 // first screen when we start node index.js
-function startPrompt() {
+function promptUser() {
     inquirer.prompt([{
         type: "list",
         message: "What would you like to do?",
@@ -17,8 +17,8 @@ function startPrompt() {
             "Add department",
             "Add employee",
             "Add role",
-            "View employees?",
-            "View roles?",
+            "View employees",
+            "View roles",
             "View deparments",
             "Update employee roles",
             "I am done!"
@@ -73,19 +73,29 @@ function addRole() {
 
 
 function viewEmployees() {
-    console.log("viewEmployees")
+    connection.query("SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department on role.department_id = department.id;",
+        function(err, res) {
+            if (err) throw err
+            console.table(res);
+            promptUser();
+        })
 };
 
 function viewRoles() {
-    console.log("viewRoles")
+    connection.query("SELECT * FROM roles",
+        function(err, res) {
+            if (err) throw err
+            console.table(res);
+            promptUser();
+        })
 };
 
 function viewDepartments() {
-    connection.query("SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY employee.id;",
+    connection.query("SELECT * FROM department",
         function(err, res) {
             if (err) throw err
-            console.table(res)
-            startPrompt()
+            console.table(res);
+            promptUser();
         })
 };
 
@@ -98,4 +108,4 @@ function exit() {
     process.exit();
 };
 
-startPrompt();
+promptUser();
