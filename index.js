@@ -73,7 +73,7 @@ function addRole() {
 
 
 function viewEmployees() {
-    connection.query("SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department on role.department_id = department.id;",
+    connection.query("SELECT * FROM employee",
         function(err, res) {
             if (err) throw err
             console.table(res);
@@ -82,7 +82,7 @@ function viewEmployees() {
 };
 
 function viewRoles() {
-    connection.query("SELECT * FROM roles",
+    connection.query("SELECT * FROM  role",
         function(err, res) {
             if (err) throw err
             console.table(res);
@@ -102,6 +102,9 @@ function viewDepartments() {
 function updateEmployeeRoles() {
     console.log("updateEmployeeRoles")
 };
+
+
+
 
 function exit() {
     console.log("Thank you! Have a great rest of your day!");
